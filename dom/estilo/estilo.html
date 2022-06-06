@@ -1,0 +1,70 @@
+<script src="https://unpkg.com/vue@2"></script>
+
+<style>
+    .caixas {
+        display: flex;
+        justify-content: space-around;
+    }
+    .demo {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+    }
+    .c1 {
+        background-color: white;
+    }
+
+    .c2 {
+        background-color: green;
+    }
+
+    .c3 {
+        background-color: black;
+    }
+
+    .girar {
+        transform: rotate(45deg);
+    }
+</style>
+
+<div id="app">
+    <div class="caixas">
+        <div class="demo" :class="{c1: aplicarC1, c2: !aplicarC1}"
+            @click="aplicarC1 = !aplicarC1"></div>
+        <div class="demo" :class="[classeCSS, {girar: aplicarGirar}]"></div>
+        <div class="demo" :style="{backgroundColor: cor}"></div>
+        <div class="demo" :style="[meuEstilo]"></div>
+        <div class="demo" :class="estilo1"></div>
+    </div>
+    <hr>
+    <input type="text" v-model="classeCSS">
+    <input type="text" v-model="cor">
+    <input type="text" v-model="largura">
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            aplicarC1: false,
+            classeCSS: 'c1',
+            aplicarGirar: true,
+            cor: 'red',
+            largura: 100
+        },
+        computed: {
+            estilo1() {
+                return {
+                    c1: this.aplicarC1,
+                    c2: !this.aplicarC1
+                }
+            },
+            meuEstilo() {
+                return {
+                    backgroundColor: this.cor,
+                    width: this.largura + 'px'
+                }
+            }
+        }
+    })
+    
+</script>
